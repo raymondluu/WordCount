@@ -1,0 +1,88 @@
+/*
+ * TCSS 342 Winter 2013
+ * Assignment 4
+ */
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+/**
+ * Program to count words within a given text.
+ * 
+ * @author Raymond Luu
+ * @version Winter 2013
+ * 
+ */
+public class WordCount
+{
+  
+  /**
+   * The designated file.
+   */
+  private static File my_file;
+  
+  /**
+   * File found boolean.
+   */
+  private static boolean my_file_found;
+  
+  /**
+   * Ask user for file name.
+   */
+  public static void userInput()
+  {
+    final Scanner user_input = new Scanner(System.in);
+    System.out.println("Enter a file name: ");
+    final String file_name = user_input.nextLine();
+    my_file = new File(file_name);
+    
+    if (my_file_found)
+    {
+      user_input.close();
+    }
+  }
+  
+  /**
+   * Scans input from given file.
+   */
+  public static void scanInput()
+  {
+    Scanner input_file;
+    try
+    {
+      input_file = new Scanner(my_file);
+      
+      while (input_file.hasNext())
+      {
+        System.out.println(input_file.next());
+      }
+      
+      my_file_found = true;
+      input_file.close();
+    }
+    catch (final FileNotFoundException e)
+    {
+      System.out.println("File doesn't exist, try again.");
+      my_file_found = false;
+    }
+  }
+  
+  /**
+   * Main method.
+   * 
+   * @param the_args the argument. 
+   */
+  public static void main(final String[] the_args)
+  {
+    while (!my_file_found)
+    {
+      userInput();
+      scanInput();
+    }
+    
+    
+
+  }
+
+}
